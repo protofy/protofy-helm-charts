@@ -3,6 +3,16 @@ entries:
   prometheus-agent:
   - apiVersion: v2
     appVersion: v0.24.2
+    created: "2022-08-12T14:05:22.516976631Z"
+    description: A Helm chart for Kubernetes
+    digest: 0008be5f080752fddf037453b89303655fcde2920703558afd4bc0cca3078c9d
+    name: prometheus-agent
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/prometheus-agent-0.0.3/prometheus-agent-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: v0.24.2
     created: "2022-08-11T17:58:07.248078228Z"
     description: A Helm chart for Kubernetes
     digest: 0b097a0151f450e7ab9e8f070f166f0eab916a2d226dea2f07233adc432e6ba9
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/prometheus-agent-0.0.1/prometheus-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-11T17:58:07.248088228Z"
+generated: "2022-08-12T14:05:22.517059831Z"
