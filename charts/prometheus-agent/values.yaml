@@ -10,7 +10,7 @@ fullnameOverride: ""
 
 monitor_kubernetes: false
 
-remote_write: |
+remote_write:
   - url: YOUR_PROMETHEUS_REMOTE_WRITE_URL
     basic_auth:
       username: YOUR_PROMETHEUS_REMOTE_WRITE_USERNAME

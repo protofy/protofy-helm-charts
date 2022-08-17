@@ -13,7 +13,12 @@ data:
       configs:
         - name: integrations
           remote_write:
-            {{ .Values.remote_write | nindent 12 }}
+            {{- range .Values.remote_write }}
+            - url: {{ .url }}
+              basic_auth:
+                username: {{.basic_auth.username}}
+                password: {{.basic_auth.password}}
+            {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}
             - job_name: integrations/kubernetes/cadvisor
