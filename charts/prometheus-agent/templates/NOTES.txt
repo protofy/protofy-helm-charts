@@ -1,1 +1,1 @@
-Hi there, the agent should be running by now
+Hi there, the prometheus agent should be running by now
