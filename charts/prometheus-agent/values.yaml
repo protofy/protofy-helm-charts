@@ -7,6 +7,7 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+cluster_name: ""
 
 monitor_kubernetes: false
 
