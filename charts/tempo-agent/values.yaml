@@ -2,14 +2,15 @@ cluster_name: ""
 
 nameOverride: ""
 fullnameOverride: ""
-
 monitor_kubernetes: false
 
 remote_write:
-  - url: YOUR_PROMETHEUS_REMOTE_WRITE_URL
-    basic_auth:
-      username: YOUR_PROMETHEUS_REMOTE_WRITE_USERNAME
-      password: YOUR_PROMETHEUS_REMOTE_WRITE_PASSWORD
+  - basic_auth:
+      password: YOUR_TEMPO_PASSWORD
+      username: YOUR_TEMPO_USER
+    endpoint: YOUR_TEMPO_ENDPOINT
+    retry_on_failure:
+      enabled: false
 
 
 serviceAccount:

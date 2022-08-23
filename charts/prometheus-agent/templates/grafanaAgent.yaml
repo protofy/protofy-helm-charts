@@ -1,76 +1,36 @@
 apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: grafana-agent
-  namespace: {{ .Release.Namespace }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: grafana-agent
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - nodes
-      - nodes/proxy
-      - services
-      - endpoints
-      - pods
-      - events
-    verbs:
-      - get
-      - list
-      - watch
-  - nonResourceURLs:
-      - /metrics
-    verbs:
-      - get
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: grafana-agent
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: grafana-agent
-subjects:
-  - kind: ServiceAccount
-    name: grafana-agent
-    namespace: {{ .Release.Namespace }}
----
-apiVersion: v1
 kind: Service
 metadata:
+  name: {{ include "prometheus-agent.fullname" . }}
   labels:
-    name: grafana-agent
-  name: grafana-agent
+    {{- include "prometheus-agent.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   clusterIP: None
   ports:
-    - name: grafana-agent-http-metrics
+    - name: "http-metrics"
       port: 80
       targetPort: 80
   selector:
-    name: grafana-agent
+    {{- include "prometheus-agent.selectorLabels" . | nindent 4 }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: grafana-agent
+  name: {{ include "prometheus-agent.fullname" . }}
+  labels:
+    {{- include "prometheus-agent.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: grafana-agent
-  serviceName: grafana-agent
+      {{- include "prometheus-agent.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "prometheus-agent.fullname" . }}
   template:
     metadata:
       labels:
-        name: grafana-agent
+        {{- include "prometheus-agent.labels" . | nindent 8 }}
     spec:
       containers:
         - args:
@@ -84,9 +44,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          image: grafana/agent:v0.24.2
+          image: "grafana/agent:{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
-          name: grafana-agent
+          name: {{ .Chart.Name }}
           ports:
             - containerPort: 80
               name: http-metrics
@@ -94,12 +54,12 @@ spec:
             - mountPath: /var/lib/agent
               name: agent-wal
             - mountPath: /etc/agent
-              name: grafana-agent
-      serviceAccount: grafana-agent
+              name: {{ include "prometheus-agent.fullname" . }}
+      serviceAccountName: {{ include "prometheus-agent.serviceAccountName" . }}
       volumes:
         - configMap:
-            name: grafana-agent
-          name: grafana-agent
+            name: {{ include "prometheus-agent.fullname" . }}
+          name: {{ include "prometheus-agent.fullname" . }}
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:

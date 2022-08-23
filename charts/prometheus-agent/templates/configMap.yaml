@@ -1,6 +1,8 @@
 kind: ConfigMap
 metadata:
-  name: grafana-agent
+  name: {{ include "prometheus-agent.fullname" . }}
+  labels:
+    {{- include "prometheus-agent.labels" . | nindent 4 }}
 apiVersion: v1
 data:
   agent.yaml: |
