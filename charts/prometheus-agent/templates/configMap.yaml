@@ -63,6 +63,11 @@ data:
               kubernetes_sd_configs:
                 - role: pod
               relabel_configs:
+                # Make Scheme configurable by setting prometheus.io/scheme
+                - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scheme]
+                  action: replace
+                  target_label: __scheme__
+                  regex: (https?)
                 # Scrape metrics when the prometheus.io/scrape annotation has been set to true
                 - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
                   action: keep
