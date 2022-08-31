@@ -61,7 +61,7 @@ data:
             - job_name: "kubernetes-pods"
               {{- if .Values.bearerAuth}}
               bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              {{-end }}
+              {{- end }}
               kubernetes_sd_configs:
                 - role: pod
               relabel_configs:
