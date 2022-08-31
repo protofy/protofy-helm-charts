@@ -59,7 +59,9 @@ data:
                 server_name: kubernetes
     {{- end }}
             - job_name: "kubernetes-pods"
+              {{- if .Values.bearerAuth}}
               bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              {{-end }}
               kubernetes_sd_configs:
                 - role: pod
               relabel_configs:
@@ -94,7 +96,16 @@ data:
                 - source_labels: [ __meta_kubernetes_pod_name ]
                   action: replace
                   target_label: pod
-              scheme: https
+                {{- if .Values.nameLabelOverride }}
+                - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_{{.Values.nameLabelOverride}}]
+                {{- else}}
+                - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_name]
+                {{- end}}
+                  action: replace
+                  separator: /
+                  target_label: job
+                  replacement: $1
+              scheme: http
               tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
                 insecure_skip_verify: false

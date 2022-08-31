@@ -5,6 +5,10 @@ fullnameOverride: ""
 
 monitor_kubernetes: false
 
+nameLabelOverride: ""
+
+bearerAuth: false
+
 remote_write:
   - url: YOUR_PROMETHEUS_REMOTE_WRITE_URL
     basic_auth:
