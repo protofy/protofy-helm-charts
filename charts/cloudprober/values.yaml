@@ -4,7 +4,7 @@ probes:
     type: HTTP
     targets:
       host_names:
-        - www.google.com
+        - www.protofy.com
     interval: 15000
     timeout:  1000
     validators:
