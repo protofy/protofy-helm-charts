@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudprober
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudprober
+  template:
+    metadata:
+      annotations:
+        checksum/config: "${CONFIG_CHECKSUM}"
+      labels:
+        app: cloudprober
+    spec:
+      volumes:
+        - name: cloudprober-config
+          configMap:
+            name: cloudprober-config
+      containers:
+        - name: cloudprober
+          image: "cloudprober/cloudprober:v{{ .Chart.AppVersion }}"
+          command: ["/cloudprober"]
+          args: [
+            "--config_file","/cfg/cloudprober.cfg",
+            "--logtostderr"
+          ]
+          volumeMounts:
+            - name: cloudprober-config
+              mountPath: /cfg
+          ports:
+            - name: http
+              containerPort: 9313

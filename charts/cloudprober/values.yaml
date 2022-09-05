@@ -1,0 +1,16 @@
+probes:
+  - name: demo_probe
+    # type is either: Ping, HTTP, UDP, DNS, External
+    type: HTTP
+    targets:
+      host_names:
+        - www.google.com
+    interval: 15000
+    timeout:  1000
+    validators:
+      - name: http_2XX
+        validator_config: |
+          http_validator {
+            success_status_codes: "200-299"
+          }
+            
