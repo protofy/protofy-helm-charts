@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  cloudprober:
+  - apiVersion: v2
+    appVersion: 0.11.9
+    created: "2022-09-12T15:10:56.10697664Z"
+    description: A Helm chart for Kubernetes
+    digest: e42c623c0bb7a9895dbbfb8df2ef71ac1736706ee961b19c42375f6c9d792ae3
+    name: cloudprober
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/cloudprober-0.0.1/cloudprober-0.0.1.tgz
+    version: 0.0.1
   prometheus-agent:
   - apiVersion: v2
     appVersion: v0.26.1
@@ -132,4 +143,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-08-31T15:26:03.77049361Z"
+generated: "2022-09-12T15:10:56.10702294Z"
