@@ -33,7 +33,11 @@ data:
       {{- range .validators }}
       validator {
         name: "{{ .name }}"
+        {{- if .validator_config }}
         {{- .validator_config | nindent 8 }}
+        {{- else if .regex }}
+        regex: "{{ .regex }}"
+        {{- end }}
       }
       {{- end }}
       {{- end }}

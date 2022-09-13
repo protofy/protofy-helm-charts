@@ -13,4 +13,6 @@ probes:
           http_validator {
             success_status_codes: "200-299"
           }
+      - name: regex
+        regex: protofy
             
