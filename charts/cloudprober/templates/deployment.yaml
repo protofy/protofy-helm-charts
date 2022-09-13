@@ -10,7 +10,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: "${CONFIG_CHECKSUM}"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9313"
       labels:
         app: cloudprober
     spec:
