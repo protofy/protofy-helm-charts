@@ -18,3 +18,6 @@ To install the <chart-name> (e.g. prometheus-agent) chart:
 To uninstall the chart:
 
     helm delete my-prometheus-agent
+
+
+To add new Templates, copy the blueprint and replace accordingly.
