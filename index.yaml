@@ -21,6 +21,18 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/cloudprober-0.0.1/cloudprober-0.0.1.tgz
     version: 0.0.1
+  ops-monitoring-example-tracing:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-09-20T16:28:43.334774876Z"
+    description: a protofy example application to generate tracing data for tempo,
+      loki and prometheus
+    digest: f5f2fb3b54c3d78f8dd31dd297a2062c6dad2717971ccddf845bc7eff2fe4504
+    name: ops-monitoring-example-tracing
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/ops-monitoring-example-tracing-0.0.2/ops-monitoring-example-tracing-0.0.2.tgz
+    version: 0.0.2
   prometheus-agent:
   - apiVersion: v2
     appVersion: v0.26.1
@@ -163,4 +175,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-09-20T16:07:57.127404808Z"
+generated: "2022-09-20T16:28:43.335005084Z"
