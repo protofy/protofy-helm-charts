@@ -1,0 +1,10 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  tag: ""
+
+otel:
+  agentUrl: "http://tempo-agent:4317"
+  applicationName: "test-agent"
+  protocol: "otlp"

@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "ops-monitoring-example-tracing.fullname" . }}
+  labels:
+    {{- include "ops-monitoring-example-tracing.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: monitor
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    {{- include "ops-monitoring-example-tracing.selectorLabels" . | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '8081'
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "ops-monitoring-example-tracing.fullname" . }}
+  labels:
+    {{- include "ops-monitoring-example-tracing.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "ops-monitoring-example-tracing.selectorLabels" . | nindent 6 }}
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8081'
+      labels:
+        {{- include "ops-monitoring-example-tracing.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - image: 'ghcr.io/protofy/ops-monitoring-example/example-tracing:{{ .Values.image.tag | default .Chart.AppVersion }}'
+          name: tracing-container
+          imagePullPolicy: Always
+          command: [ "java" ]
+          args: [ "-javaagent:./opentelemetry-javaagent.jar","-jar","/app.jar" ]
+          env:
+            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+              value: {{ .Values.otel.agentUrl}}
+            - name: OTEL_SERVICE_NAME
+              value: {{ .Values.otel.applicationName }}
+            - name: OTEL_TRACES_EXPORTER
+              value: {{ .Values.otel.protocol  }}
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8081
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8081
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            limits:
+              cpu: "1000m"
+              memory: "500Mi"
+            requests:
+              cpu: "200m"
+              memory: "500Mi"
+        - image: 'curlimages/curl:latest'
+          imagePullPolicy: Always
+          name: loadtest
+          command: [ '/bin/sh' ]
+          args:
+            - "-c"
+            - 'while true; do curl "http://{{ include "ops-monitoring-example-tracing.fullname" . }}:8080/hello/$((1 + $RANDOM % 10000))"; sleep 10s; done'
