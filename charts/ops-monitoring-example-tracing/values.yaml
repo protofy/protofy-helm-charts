@@ -4,7 +4,7 @@ fullnameOverride: ""
 image:
   tag: ""
 
-serviceName: test-tracing-app
+serviceName: "test-tracing-app"
 servicePort: 8080
 
 otel:
