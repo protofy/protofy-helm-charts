@@ -11,7 +11,12 @@ data:
       global:
         scrape_interval: 60s
         external_labels:
-          cluster: {{ .Values.cluster_name }}
+          {{- if .Values.cluster_name }}
+          cluster: {{.Values.cluster_name}}
+          {{- end }}
+          {{- if .Values.environment }}
+          environment: {{.Values.environment}}
+          {{- end }}
       configs:
         - name: integrations
           remote_write:
