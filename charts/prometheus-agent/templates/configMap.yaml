@@ -9,7 +9,7 @@ data:
     metrics:
       wal_directory: /var/lib/agent/wal
       global:
-        scrape_interval: 60s
+        scrape_interval: 15s
         external_labels:
           {{- if .Values.cluster_name }}
           cluster: {{.Values.cluster_name}}
