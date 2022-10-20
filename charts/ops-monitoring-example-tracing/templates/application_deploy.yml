@@ -43,7 +43,7 @@ spec:
         {{- include "ops-monitoring-example-tracing.labels" . | nindent 8 }}
     spec:
       containers:
-        - image: 'ghcr.io/protofy/ops-monitoring-example/example-tracing:{{ .Values.image.tag | default .Chart.AppVersion }}'
+        - image: 'ghcr.io/protofy/ops-monitoring-example-app/example-tracing:{{ .Values.image.tag | default .Chart.AppVersion }}'
           name: tracing-container
           imagePullPolicy: Always
           command: [ "java" ]
