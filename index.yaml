@@ -220,6 +220,16 @@ entries:
   tempo-agent:
   - apiVersion: v2
     appVersion: v0.24.2
+    created: "2022-10-20T14:06:09.920244619Z"
+    description: A Helm chart for Kubernetes
+    digest: 4af47aca5363f5e32a2965fef58d90029eac1add0917136462ffee1faea56b48
+    name: tempo-agent
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.2/tempo-agent-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v0.24.2
     created: "2022-08-23T09:25:10.6879765Z"
     description: A Helm chart for Kubernetes
     digest: ecac2af9010d0a6d6945e5b47ceb7e6b363e685c5e4bddf093dbe2c1e2aeb844
@@ -228,4 +238,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-10-20T09:23:37.732658781Z"
+generated: "2022-10-20T14:06:09.920428818Z"
