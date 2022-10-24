@@ -55,6 +55,10 @@ spec:
               value: {{ .Values.otel.applicationName }}
             - name: OTEL_TRACES_EXPORTER
               value: {{ .Values.otel.protocol  }}
+            - name: OTEL_METRICS_EXPORTER
+              value: none
+            - name: OTEL_LOGS_EXPORTER
+              value: none
           livenessProbe:
             httpGet:
               path: /health/liveness
