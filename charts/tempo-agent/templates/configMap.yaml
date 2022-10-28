@@ -35,6 +35,7 @@ data:
                 password: {{.basic_auth.password}}
                 username: {{.basic_auth.username}}
               endpoint: {{ .endpoint }}
+              protocol: http
               retry_on_failure:
                 enabled: {{.retry_on_failure.enabled}}
             {{- end }}
