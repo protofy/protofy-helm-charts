@@ -34,7 +34,8 @@ data:
             - basic_auth:
                 password: {{.basic_auth.password}}
                 username: {{.basic_auth.username}}
-              endpoint: {{ .endpoint }}
+              endpoint: {{ .endpoint }}/otlp
+              protocol: http
               retry_on_failure:
                 enabled: {{.retry_on_failure.enabled}}
             {{- end }}
