@@ -33,6 +33,8 @@ data:
               kubernetes_sd_configs:
                 - role: node
               relabel_configs:
+                - action: labelmap
+                  regex: __meta_kubernetes_node_label_(.+)
                 - replacement: kubernetes.default.svc:443
                   target_label: __address__
                 - regex: (.+)
@@ -51,7 +53,9 @@ data:
                 - role: node
               relabel_configs:
                 - replacement: kubernetes.default.svc:443
-                  target_label: __address__
+                  target_label: __address_
+                - action: labelmap
+                  regex: __meta_kubernetes_node_label_(.+)_
                 - regex: (.+)
                   replacement: /api/v1/nodes/$1/proxy/metrics
                   source_labels:
@@ -60,8 +64,55 @@ data:
               scheme: https
               tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-                insecure_skip_verify: false
+                insecure_skip_verify: true
                 server_name: kubernetes
+            - job_name: integrations/kubernetes/service-endpoints
+              honor_labels: true
+              kubernetes_sd_configs:
+              - role: endpoints
+              relabel_configs:
+              - action: keep
+                regex: true
+                source_labels:
+                - __meta_kubernetes_service_annotation_prometheus_io_scrape
+              - action: drop
+                regex: true
+                source_labels:
+                - __meta_kubernetes_service_annotation_prometheus_io_scrape_slow
+              - action: replace
+                regex: (https?)
+                source_labels:
+                - __meta_kubernetes_service_annotation_prometheus_io_scheme
+                target_label: __scheme__
+              - action: replace
+                regex: (.+)
+                source_labels:
+                - __meta_kubernetes_service_annotation_prometheus_io_path
+                target_label: __metrics_path__
+              - action: replace
+                regex: (.+?)(?::\d+)?;(\d+)
+                replacement: $1:$2
+                source_labels:
+                - __address__
+                - __meta_kubernetes_service_annotation_prometheus_io_port
+                target_label: __address__
+              - action: labelmap
+                regex: __meta_kubernetes_service_annotation_prometheus_io_param_(.+)
+                replacement: __param_$1
+              - action: labelmap
+                regex: __meta_kubernetes_service_label_(.+)
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_namespace
+                target_label: namespace
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_service_name
+                target_label: service
+              - action: replace
+                source_labels:
+                - __meta_kubernetes_pod_node_name
+                target_label: node
     {{- end }}
             - job_name: "kubernetes-pods"
               {{- if .Values.bearerAuth}}
@@ -71,21 +122,21 @@ data:
                 - role: pod
               relabel_configs:
                 # Make Scheme configurable by setting prometheus.io/scheme
-                - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scheme]
+                - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_scheme ]
                   action: replace
                   target_label: __scheme__
                   regex: (https?)
                 # Scrape metrics when the prometheus.io/scrape annotation has been set to true
-                - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+                - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_scrape ]
                   action: keep
                   regex: true
                 # Allow us to overwrite the path with the content of prometheus.io/path
-                - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+                - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_path ]
                   action: replace
                   target_label: __metrics_path__
                   regex: (.+)
                   # Allow us to overwrite the default path with the content of prometheus.io/port
-                - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+                - source_labels: [ __address__, __meta_kubernetes_pod_annotation_prometheus_io_port ]
                   action: replace
                   regex: ([^:]+)(?::\d+)?;(\d+)
                   replacement: ${1}:${2}
@@ -102,9 +153,9 @@ data:
                   action: replace
                   target_label: pod
                 {{- if .Values.nameLabelOverride }}
-                - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_{{.Values.nameLabelOverride}}]
+                - source_labels: [ __meta_kubernetes_namespace, __meta_kubernetes_pod_label_{{.Values.nameLabelOverride}}]
                 {{- else}}
-                - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_name]
+                - source_labels: [ __meta_kubernetes_namespace, __meta_kubernetes_pod_label_name ]
                 {{- end}}
                   action: replace
                   separator: /
