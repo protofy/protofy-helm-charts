@@ -23,8 +23,8 @@ data:
             {{- range .Values.remote_write }}
             - url: {{ .url }}
               basic_auth:
-                username: {{.basic_auth.username}}
-                password: {{.basic_auth.password}}
+                username: '{{.basic_auth.username}}'
+                password: '{{.basic_auth.password}}'
             {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}
