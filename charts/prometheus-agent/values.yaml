@@ -16,6 +16,7 @@ remote_write:
     basic_auth:
       username: YOUR_PROMETHEUS_REMOTE_WRITE_USERNAME
       password: YOUR_PROMETHEUS_REMOTE_WRITE_PASSWORD
+    tenant_id: ""
 
 
 serviceAccount:

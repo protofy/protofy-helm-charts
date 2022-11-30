@@ -25,6 +25,11 @@ data:
               basic_auth:
                 username: '{{.basic_auth.username}}'
                 password: '{{.basic_auth.password}}'
+              {{- if .tenant_id}}
+              #TODO: Add tenant_id header
+              headers:
+                X-Scope-OrgId: {{.tenant_id}}
+              {{- end }}
             {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}
