@@ -24,6 +24,17 @@ entries:
   ops-monitoring-example-tracing:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-12-02T14:57:42.752388076Z"
+    description: a protofy example application to generate tracing data for tempo,
+      loki and prometheus
+    digest: 94b6d7dbe04c6668e38128ff7322b2892c1199e500cbda655a7d152907ecdcfb
+    name: ops-monitoring-example-tracing
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/ops-monitoring-example-tracing-0.0.8/ops-monitoring-example-tracing-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-12-02T14:27:48.089728342Z"
     description: a protofy example application to generate tracing data for tempo,
       loki and prometheus
@@ -360,4 +371,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-12-02T14:27:48.089925843Z"
+generated: "2022-12-02T14:57:42.752495235Z"
