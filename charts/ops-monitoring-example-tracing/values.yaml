@@ -11,3 +11,4 @@ otel:
   agentUrl: "http://tempo-agent:4317"
   applicationName: "test-tracing-app"
   protocol: "otlp"
+  tenant_id: ""
