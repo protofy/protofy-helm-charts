@@ -11,9 +11,9 @@ remote_write:
     tenant_id: ""
     retry_on_failure:
       enabled: false
+    useGrpc: false
 
 
-useGrpc: false
 
 serviceAccount:
   # Specifies whether a service account should be created
