@@ -13,6 +13,8 @@ remote_write:
       enabled: false
 
 
+useGrpc: false
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
