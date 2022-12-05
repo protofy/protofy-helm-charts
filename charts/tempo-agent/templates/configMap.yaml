@@ -39,7 +39,7 @@ data:
               headers:
                 X-Scope-OrgId: '{{.tenant_id}}'
               {{- end }}
-              {{- if .Values.useGrpc -}}
+              {{- if .useGrpc -}}
               protocol: grpc
               {{- else }}
               protocol: http
