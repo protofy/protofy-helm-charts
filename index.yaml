@@ -24,6 +24,17 @@ entries:
   ops-monitoring-example-tracing:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-12-05T15:42:31.44610394Z"
+    description: a protofy example application to generate tracing data for tempo,
+      loki and prometheus
+    digest: 06a766d794de640dac52d4cd9a9158b2f9528721034cdba62ec5013fe6d557ae
+    name: ops-monitoring-example-tracing
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/ops-monitoring-example-tracing-0.0.10/ops-monitoring-example-tracing-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-12-02T15:04:22.847892732Z"
     description: a protofy example application to generate tracing data for tempo,
       loki and prometheus
@@ -314,6 +325,16 @@ entries:
   tempo-agent:
   - apiVersion: v2
     appVersion: v0.27.0
+    created: "2022-12-05T15:42:31.613967259Z"
+    description: A Helm chart for Kubernetes
+    digest: 4acfec58b03ceefcd53471a7b3734b66272ab1d11121910d3af7d99cd057c3f4
+    name: tempo-agent
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.8/tempo-agent-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v2
+    appVersion: v0.27.0
     created: "2022-11-10T15:38:06.303666913Z"
     description: A Helm chart for Kubernetes
     digest: 528a51355190cb061236fe4739829f277cebbabe2e09fa614bcb74a63846461f
@@ -382,4 +403,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2022-12-02T15:04:22.848035135Z"
+generated: "2022-12-05T15:42:31.614459966Z"
