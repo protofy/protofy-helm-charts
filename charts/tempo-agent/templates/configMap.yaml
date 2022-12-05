@@ -35,6 +35,10 @@ data:
                 password: '{{.basic_auth.password}}'
                 username: '{{.basic_auth.username}}'
               endpoint: {{ .endpoint }}/otlp
+              {{- if .tenant_id}}
+              headers:
+                X-Scope-OrgId: '{{.tenant_id}}'
+              {{- end }}
               protocol: http
               retry_on_failure:
                 enabled: {{.retry_on_failure.enabled}}

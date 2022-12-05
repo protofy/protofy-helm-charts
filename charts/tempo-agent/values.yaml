@@ -8,6 +8,7 @@ remote_write:
       password: YOUR_TEMPO_PASSWORD
       username: YOUR_TEMPO_USER
     endpoint: YOUR_TEMPO_ENDPOINT
+    tenant_id: ""
     retry_on_failure:
       enabled: false
 

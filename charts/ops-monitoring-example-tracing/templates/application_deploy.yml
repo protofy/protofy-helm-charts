@@ -59,10 +59,6 @@ spec:
               value: none
             - name: OTEL_LOGS_EXPORTER
               value: none
-            {{- if .Values.otel.tenant_id }}
-            - name: OTEL_EXPORTER_OTLP_HEADERS
-              value: X-Scope-OrgID={{ .Values.otel.tenant_id }}
-            {{- end}}
           livenessProbe:
             httpGet:
               path: /health/liveness
