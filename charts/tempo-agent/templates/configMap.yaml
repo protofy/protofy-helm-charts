@@ -34,7 +34,7 @@ data:
             - basic_auth:
                 password: '{{.basic_auth.password}}'
                 username: '{{.basic_auth.username}}'
-              endpoint: {{ .endpoint }}:80/otlp
+              endpoint: {{ .endpoint }}:4317
               {{- if .tenant_id}}
               headers:
                 X-Scope-OrgId: '{{.tenant_id}}'
