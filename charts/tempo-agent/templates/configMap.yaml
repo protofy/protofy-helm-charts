@@ -34,7 +34,7 @@ data:
             - basic_auth:
                 password: '{{.basic_auth.password}}'
                 username: '{{.basic_auth.username}}'
-              endpoint: {{ .endpoint }}/otlp
+              endpoint: {{ .endpoint }}:80/otlp
               {{- if .tenant_id}}
               headers:
                 X-Scope-OrgId: '{{.tenant_id}}'
@@ -46,6 +46,7 @@ data:
               {{- end }}
               retry_on_failure:
                 enabled: {{.retry_on_failure.enabled}}
+              insecure: true
             {{- end }}
           scrape_configs:
             - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
