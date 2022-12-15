@@ -18,6 +18,7 @@ remote_write:
       password: YOUR_PROMETHEUS_REMOTE_WRITE_PASSWORD
     tenant_id: ""
 
+blackboxTargets: []
 
 serviceAccount:
   # Specifies whether a service account should be created
