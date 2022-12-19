@@ -19,6 +19,7 @@ remote_write:
     tenant_id: ""
 
 blackboxTargets: []
+blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox:9115
 
 serviceAccount:
   # Specifies whether a service account should be created
