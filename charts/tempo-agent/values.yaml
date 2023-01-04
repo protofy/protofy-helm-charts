@@ -1,25 +1,29 @@
+# -- Name of the cluster that is being monitored
 cluster_name: ""
 
 nameOverride: ""
 fullnameOverride: ""
 
 remote_write:
+  # -- Tempo Connection
   - basic_auth:
-      password: YOUR_TEMPO_PASSWORD
-      username: YOUR_TEMPO_USER
-    endpoint: YOUR_TEMPO_ENDPOINT
-    tenant_id: ""
+      password:
+      username:
+    endpoint:
+    tenant_id:
+    # -- Tenant ID in case prometheus is running in multi_tenant mode
     retry_on_failure:
       enabled: false
+    # -- Whether or not to use grpc this can cause issues with the gateway service
     useGrpc: false
 
 
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: { }
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  # -- The name of the service account to use.
+  # -- If not set and create is true, a name is generated using the fullname template
+  name: 

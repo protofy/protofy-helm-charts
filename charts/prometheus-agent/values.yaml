@@ -1,31 +1,37 @@
-cluster_name: ""
+# -- Name of the cluster that is being monitored
+cluster_name:
+# -- Stage, eg.: testing, staging, production
+environment:
 
-environment: ""
+nameOverride:
+fullnameOverride:
 
-nameOverride: ""
-fullnameOverride: ""
-
+# -- When set to true scrapes kubernetes metrics
 monitor_kubernetes: false
 
-nameLabelOverride: ""
+nameLabelOverride:
 
 bearerAuth: false
 
 remote_write:
-  - url: YOUR_PROMETHEUS_REMOTE_WRITE_URL
+  # -- Prometheus/Mimir Connection
+  - url:
     basic_auth:
-      username: YOUR_PROMETHEUS_REMOTE_WRITE_USERNAME
-      password: YOUR_PROMETHEUS_REMOTE_WRITE_PASSWORD
-    tenant_id: ""
+      username:
+      password:
+    # -- Tenant ID in case prometheus is running in multi_tenant mode
+    tenant_id:
 
+# -- Targets to scrape with the blackbox module
 blackboxTargets: []
+# -- Address of the blackbox service to use
 blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox:9115
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  # -- The name of the service account to use.
+  # -- If not set and create is true, a name is generated using the fullname template
+  name:
