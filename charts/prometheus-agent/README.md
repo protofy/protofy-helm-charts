@@ -2,7 +2,7 @@
 
 ![Version: 0.0.23](https://img.shields.io/badge/Version-0.0.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.26.1](https://img.shields.io/badge/AppVersion-v0.26.1-informational?style=flat-square)
 
-A Helm chart for Kubernetes
+Helm chart to deploy a version of the grafana agent geared towards scraping prometheus metrics and sending them to a Prometheus/Mimir instance via remote write
 
 ## Values
 

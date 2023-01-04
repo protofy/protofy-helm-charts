@@ -1,6 +1,6 @@
 apiVersion: v2
 name: ops-monitoring-example-tracing
-description: a protofy example application to generate tracing data for tempo, loki and prometheus
+description: A protofy example application to generate tracing data for tempo, loki and prometheus
 
 # A chart can be either an 'application' or a 'library' chart.
 #
