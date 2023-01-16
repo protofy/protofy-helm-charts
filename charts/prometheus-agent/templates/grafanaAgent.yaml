@@ -20,6 +20,8 @@ metadata:
   name: {{ include "prometheus-agent.fullname" . }}
   labels:
     {{- include "prometheus-agent.labels" . | nindent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
