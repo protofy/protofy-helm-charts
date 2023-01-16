@@ -9,6 +9,9 @@ fullnameOverride:
 # -- When set to true scrapes kubernetes metrics
 monitor_kubernetes: false
 
+# -- When set to true will scrape pod metrics
+monitor_pods: true
+
 nameLabelOverride:
 
 bearerAuth: false
@@ -25,7 +28,7 @@ remote_write:
 # -- Targets to scrape with the blackbox module
 blackboxTargets: []
 # -- Address of the blackbox service to use
-blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox:9115
+blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter
 
 serviceAccount:
   # -- Specifies whether a service account should be created
