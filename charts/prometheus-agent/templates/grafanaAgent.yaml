@@ -33,6 +33,8 @@ spec:
     metadata:
       labels:
         {{- include "prometheus-agent.labels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
     spec:
       containers:
         - args:
