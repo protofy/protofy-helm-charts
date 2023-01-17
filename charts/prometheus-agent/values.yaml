@@ -28,7 +28,7 @@ remote_write:
 # -- Targets to scrape with the blackbox module
 blackboxTargets: []
 # -- Address of the blackbox service to use
-blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter
+blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox
 
 serviceAccount:
   # -- Specifies whether a service account should be created
