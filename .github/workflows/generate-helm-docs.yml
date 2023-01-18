@@ -1,0 +1,29 @@
+name: generate helm-docs
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: generate helm-doc
+        run: |
+          sudo curl -L https://github.com/norwoodj/helm-docs/releases/download/v1.11.0/helm-docs_1.11.0_Linux_x86_64.deb -o /helm-doc.deb
+          sudo dpkg -i /helm-doc.deb
+          helm-docs
+          git add **/README.md
+          git commit -m "generated README.md by helm-docs"
+          git push
