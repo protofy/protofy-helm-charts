@@ -1,6 +1,6 @@
 # prometheus-agent
 
-![Version: 0.0.23](https://img.shields.io/badge/Version-0.0.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.26.1](https://img.shields.io/badge/AppVersion-v0.26.1-informational?style=flat-square)
+![Version: 0.0.34](https://img.shields.io/badge/Version-0.0.34-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.26.1](https://img.shields.io/badge/AppVersion-v0.26.1-informational?style=flat-square)
 
 Helm chart to deploy a version of the grafana agent geared towards scraping prometheus metrics and sending them to a Prometheus/Mimir instance via remote write
 
@@ -15,12 +15,14 @@ Helm chart to deploy a version of the grafana agent geared towards scraping prom
 | environment | string | `nil` | Stage, eg.: testing, staging, production |
 | fullnameOverride | string | `nil` |  |
 | monitor_kubernetes | bool | `false` | When set to true scrapes kubernetes metrics |
+| monitor_pods | bool | `true` | When set to true will scrape pod metrics |
 | nameLabelOverride | string | `nil` |  |
 | nameOverride | string | `nil` |  |
 | remote_write[0] | object | `{"basic_auth":{"password":null,"username":null},"tenant_id":null,"url":null}` | Prometheus/Mimir Connection |
 | remote_write[0].tenant_id | string | `nil` | Tenant ID in case prometheus is running in multi_tenant mode |
-| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.clusterRole | object | `{"create":true}` | Create the cluster role that the service account uses. Only neccessary for the first agent |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
+| serviceAccount.labels | object | `{}` | Annotations to add to the service account |
 | serviceAccount.name | string | `nil` | If not set and create is true, a name is generated using the fullname template |
 
 ----------------------------------------------
