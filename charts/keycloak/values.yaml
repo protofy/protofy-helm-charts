@@ -1,0 +1,57 @@
+# Default values for keycloak.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  image: quay.io/keycloak/keycloak:20.0.3
+  pullSecrets: [docker-cfg]
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+podLabels:
+  git_sha: 123abc
+
+service:
+  type: ClusterIP
+  port: 8080
+
+host: "foo"
+
+admin:
+  username: admin
+  password: admin
+
+database:
+  external: true
+  vendor: postgres # mariadb mssql mysql oracle
+  username: keycloak
+  password: keycloak
+  url: ""
+
+ingress:
+  enabled: true
+  className: "nginx"
+  certManager:
+    enabled: true
+    keySize: 4096
+    issuer: letsencrypt-cluster-prod
+  tlsSecret: keycloak-tls-secret
+  path: /
+  pathType: Prefix
+  annotations: {}
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
