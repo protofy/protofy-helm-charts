@@ -16,10 +16,10 @@ A Helm chart to deploy a keycloak instance
 | database.username | string | `"keycloak"` |  |
 | database.vendor | string | `"postgres"` |  |
 | fullnameOverride | string | `""` |  |
-| host | string | `"foo"` |  |
+| host | string | `""` |  |
 | image.image | string | `"quay.io/keycloak/keycloak:20.0.3"` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.pullSecrets[0] | string | `"docker-cfg"` |  |
+| image.pullSecrets[0].name | string | `"docker-cfg"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.certManager.enabled | bool | `true` |  |
 | ingress.certManager.issuer | string | `"letsencrypt-cluster-prod"` |  |
@@ -30,7 +30,7 @@ A Helm chart to deploy a keycloak instance
 | ingress.pathType | string | `"Prefix"` |  |
 | ingress.tlsSecret | string | `"keycloak-tls-secret"` |  |
 | nameOverride | string | `""` |  |
-| podLabels.git_sha | string | `"123abc"` |  |
+| podLabels | object | `{}` |  |
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | service.port | int | `8080` |  |
