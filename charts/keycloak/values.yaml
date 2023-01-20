@@ -6,20 +6,19 @@ replicaCount: 1
 
 image:
   image: quay.io/keycloak/keycloak:20.0.3
-  pullSecrets: [docker-cfg]
+  pullSecrets: [{ name: docker-cfg }]
   pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
 
-podLabels:
-  git_sha: 123abc
+podLabels: {}
 
 service:
   type: ClusterIP
   port: 8080
 
-host: "foo"
+host: ""
 
 admin:
   username: admin

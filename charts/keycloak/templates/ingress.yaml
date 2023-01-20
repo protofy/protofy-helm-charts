@@ -11,7 +11,7 @@ metadata:
     kubernetes.io/ingress.class: {{ .Values.ingress.className }}
     {{- if .Values.ingress.certManager.enabled }}
     cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager.issuer }}
-    cert-manager.io/private-key-size: {{ .Values.ingress.certManager.keySize }}
+    cert-manager.io/private-key-size: {{ .Values.ingress.certManager.keySize | quote }}
     cert-manager.io/private-key-rotation-policy: Always
     {{- end }}
     {{- with .Values.ingress.annotations }}

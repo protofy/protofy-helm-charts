@@ -51,8 +51,6 @@ spec:
               value: {{ .Values.database.username }}
             - name: KC_DB_PASSWORD
               value: {{ .Values.database.password }}
-            - name: KC_DB
-              value: {{ .Values.database.database }}
             - name: KC_DB_URL
               value: {{ .Values.database.url }}
             {{ end }}
