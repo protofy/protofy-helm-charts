@@ -37,6 +37,7 @@ spec:
               path: /realms/master
               port: {{ .Values.service.port }}
               scheme: HTTP
+            initialDelaySeconds: 30
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
