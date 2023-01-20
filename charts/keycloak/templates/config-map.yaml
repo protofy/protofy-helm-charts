@@ -5,5 +5,5 @@ metadata:
   labels:
       {{- include "keycloak.labels" . | nindent 4 }}
 data:
-  EXTERNAL_URL: {{ .Values.host }}{{ .Values.ingress.path | trimSuffix "/" }}
+  EXTERNAL_URL: https://{{ .Values.host }}{{ .Values.ingress.path | trimSuffix "/" }}
   URL: {{ include "keycloak.serviceName" . }}:{{ .Values.service.port }}{{ .Values.ingress.path | trimSuffix "/" }}
