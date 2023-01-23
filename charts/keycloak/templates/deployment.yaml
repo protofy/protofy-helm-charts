@@ -27,7 +27,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.image }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["start", "--hostname", {{ .Values.host | quote }}]
+          args: [ "start", "--hostname", {{ .Values.host | quote }}]
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -40,18 +40,10 @@ spec:
             initialDelaySeconds: 30
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          env:
-            - name: KEYCLOAK_ADMIN
-              value: {{ .Values.admin.username }}
-            - name: KEYCLOAK_ADMIN_PASSWORD
-              value: {{ .Values.admin.password }}
+          envFrom:
+            - secretRef:
+                name: keycloak-admin-secret
             {{- if .Values.database.external }}
-            - name: KC_DB
-              value: {{ .Values.database.vendor }}
-            - name: KC_DB_USERNAME
-              value: {{ .Values.database.username }}
-            - name: KC_DB_PASSWORD
-              value: {{ .Values.database.password }}
-            - name: KC_DB_URL
-              value: {{ .Values.database.url }}
-            {{ end }}
+            - secretRef:
+                name: keycloak-database-secret
+            {{- end }}

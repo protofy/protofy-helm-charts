@@ -66,3 +66,11 @@ Create the name of the service account to use
 {{- define "keycloak.serviceName" -}}
 {{ include "keycloak.fullname" . }}
 {{- end}}
+
+{{- define "keycloak.externalUrl" -}}
+https://{{ .Values.host }}{{ .Values.ingress.path | trimSuffix "/" }}
+{{- end}}
+
+{{- define "keycloak.internalUrl" -}}
+{{ include "keycloak.serviceName" . }}:{{ .Values.service.port }}{{ .Values.ingress.path | trimSuffix "/" }}
+{{- end}}
