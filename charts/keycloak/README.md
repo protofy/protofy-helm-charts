@@ -31,7 +31,6 @@ A Helm chart to deploy a keycloak instance
 | ingress.tlsSecret | string | `"keycloak-tls-secret"` |  |
 | nameOverride | string | `""` |  |
 | podLabels | object | `{}` |  |
-| replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | service.port | int | `8080` |  |
 | service.type | string | `"ClusterIP"` |  |
