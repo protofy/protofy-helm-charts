@@ -9,7 +9,7 @@ metadata:
   labels:
     {{- include "keycloak.labels" . | nindent 4 }}
 spec:
-  replicas:  1 # replicaCount not yet support {{ .Values.replicaCount }}
+  replicas: 1 # replicaCount not yet support {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "keycloak.selectorLabels" . | nindent 6 }}
