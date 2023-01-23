@@ -4,6 +4,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "keycloak.fullname" . }}
+  annotations:
+    checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
   labels:
     {{- include "keycloak.labels" . | nindent 4 }}
 spec:
