@@ -1,0 +1,25 @@
+{
+  "prConcurrentLimit": 1,
+  "extends": [
+    "config:base", ":dependencyDashboard"
+  ],  
+  "schedule": ["on monday", "on wednesday", "on friday"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "groupName": "patch dependencies",
+      "prPriority": 30
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "groupName": "minor dependencies",
+      "stabilityDays": 7,
+      "prPriority": 20
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "stabilityDays": 30,
+      "prPriority": 10
+    }
+  ]
+}
