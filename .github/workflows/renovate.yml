@@ -1,0 +1,44 @@
+name: Renovate
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0/15 * * * *'
+  issue_comment:
+    types: [edited]
+  issues:
+    types: [edited]
+  pull_request:
+    types: [edited]
+
+jobs:
+  renovate:
+    # we only want to run for issue and pr updates if the issue was authored by renovate bot
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event.issue.user.id == 125013418 }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Issue
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Issue owner: ${{ github.event.issue.user.id }} ${{ github.event.issue.user.id == 125013418 }}"
+          echo "Full if: ${{ (github.event.event_name != 'issues' && github.event.event_name != 'issue_comment') || github.event.issue.user.id == 125013418 }}"
+          echo "$GITHUB_CONTEXT"
+
+      - name: Get token
+        id: get_token
+        uses: tibdex/github-app-token@v1
+        with:
+          private_key: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.RENOVATE_APP_ID }}
+
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+
+      - name: Self-hosted Renovate
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+        uses: renovatebot/github-action@v34.82.0
+        with:
+          configurationFile: renovate.json
+          token: '${{ steps.get_token.outputs.token }}'
