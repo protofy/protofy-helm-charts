@@ -25,5 +25,5 @@ jobs:
           sudo dpkg -i /helm-doc.deb
           helm-docs
           git add **/README.md
-          git commit -m "chore(docs): Generate helm docs [bot] [skip-ci]"
+          git commit -m "ci(docu-bot): Generate helm docs"
           git push
