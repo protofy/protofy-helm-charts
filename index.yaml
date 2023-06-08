@@ -21,6 +21,17 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/cloudprober-0.0.1/cloudprober-0.0.1.tgz
     version: 0.0.1
+  nginx:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-08T09:54:33.256998652Z"
+    description: A Helm chart for Kubernetes
+    digest: 091d4ea44450433446a1430e2840b4ac43263eb6e85e0a6d0d899d9b12a211e6
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/nginx-0.1.0/nginx-0.1.0.tgz
+    version: 0.1.0
   ops-monitoring-example-tracing:
   - apiVersion: v2
     appVersion: latest
@@ -680,4 +691,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2023-02-28T16:38:16.783140429Z"
+generated: "2023-06-08T09:54:33.257175252Z"
