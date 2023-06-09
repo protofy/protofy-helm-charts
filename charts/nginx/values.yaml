@@ -68,3 +68,7 @@ affinity: {}
 #    }
 #  }
 siteConfig: ""
+
+metrics:
+  enabled: true
+  port: 9113
