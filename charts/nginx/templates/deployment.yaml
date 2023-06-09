@@ -13,13 +13,17 @@ spec:
       {{- include "nginx.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-        { { - if .Values.sitesConfig } }
-        checksum/server-block-configuration: { { include (print $.Template.BasePath "/configmap.yaml") . | sha256sum } }
-        { { - end } }
-      {{- end }}
+        {{- end }}
+        {{- if .Values.sitesConfig }}
+        checksum/server-block-configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- if .Values.metrics.enabled }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.metrics.port }}"
+        {{- end }}
       labels:
         {{- include "nginx.selectorLabels" . | nindent 8 }}
     spec:
@@ -48,10 +52,20 @@ spec:
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /ready
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        - name: nginx-metrics
+          image: "nginx/nginx-prometheus-exporter:latest"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ['-nginx.scrape-uri', 'http://127.0.0.1:8080/metrics']
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.metrics.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.metrics.resources | nindent 12 }}
       volumes:
         - name: site-config
           configMap:

@@ -4,4 +4,14 @@ metadata:
   name: site-config
 data:
   default.conf: |-
+    server {
+      listen 8080;
+      server_name localhost;
+      location /metrics {
+        stub_status;
+        allow 127.0.0.1;
+        deny all;
+      }
+    }
+  user_site.conf: |-
   {{ .Values.siteConfig | nindent 4}}
