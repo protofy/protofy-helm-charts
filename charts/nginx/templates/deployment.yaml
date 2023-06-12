@@ -47,11 +47,13 @@ spec:
               containerPort: {{ .Values.health.port }}
               protocol: TCP
           volumeMounts:
-            {{- if .Values.siteConfig }}
+            - name: nginx-temp
+              mountPath: {{ .Values.nginx.tempDir }}
+            {{- if .Values.nginx.siteConfig }}
             - name: site-config
               mountPath: /etc/nginx/conf.d
             {{- end }}
-            {{- if .Values.nginxConfig }}
+            {{- if .Values.nginx.config }}
             - name: nginx-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
@@ -77,12 +79,14 @@ spec:
           resources:
             {{- toYaml .Values.metrics.resources | nindent 12 }}
       volumes:
-        {{- if .Values.siteConfig }}
+        - name: nginx-temp
+          emptyDir: {}
+        {{- if .Values.nginx.siteConfig }}
         - name: site-config
           configMap:
             name: site-config
         {{- end }}
-        {{ if .Values.nginxConfig }}
+        {{ if .Values.nginx.config }}
         - name: nginx-config
           configMap:
             name: nginx-config

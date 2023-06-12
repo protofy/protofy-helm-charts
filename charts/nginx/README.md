@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
+![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
 
 This is a very simple NGINX chart, that can deploy a webserver serving a site config. Its main use case is to do more complex proxy passing than an ingress could handle.
 
@@ -30,7 +30,9 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | metrics.enabled | bool | `true` |  |
 | metrics.port | int | `9113` |  |
 | nameOverride | string | `""` |  |
-| nginxConfig | string | `""` |  |
+| nginx.config | string | `""` |  |
+| nginx.siteConfig | string | `""` |  |
+| nginx.tempdir | string | `"/var/run/nginx"` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
@@ -39,7 +41,6 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | securityContext | object | `{}` |  |
 | service.port | int | `80` |  |
 | service.type | string | `"ClusterIP"` |  |
-| siteConfig | string | `""` |  |
 | tolerations | list | `[]` |  |
 
 ----------------------------------------------
