@@ -20,4 +20,4 @@ data:
       }
     }
   user_site.conf: |-
-  {{ .Values.siteConfig | nindent 4}}
+  {{ .Values.nginx.siteConfig | nindent 4}}

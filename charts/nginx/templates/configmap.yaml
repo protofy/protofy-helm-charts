@@ -4,5 +4,5 @@ metadata:
   name: nginx-config
 data:
   nginx.conf: |-
-  {{ .Values.nginxConfig | nindent 4 }}
+  {{ .Values.nginx.config | nindent 4 }}
 
