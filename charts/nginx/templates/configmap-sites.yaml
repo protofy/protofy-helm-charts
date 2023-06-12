@@ -20,4 +20,4 @@ data:
       }
     }
   user_site.conf: |-
-  {{ .Values.siteConfig | indent 4}}
+  {{ .Values.siteConfig | nindent 4}}
