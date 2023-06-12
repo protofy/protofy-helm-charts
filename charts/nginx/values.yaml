@@ -74,7 +74,7 @@ affinity: {}
 nginx:
   config: ""
   siteConfig: ""
-  tempdir: "/var/run/nginx"
+  tempDir: "/var/run/nginx"
 
 metrics:
   enabled: true
