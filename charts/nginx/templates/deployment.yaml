@@ -43,17 +43,20 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+            - name: {{ .Values.health.name }} 
+              containerPort: {{ .Values.health.port }}
+              protocol: TCP
           volumeMounts:
             - name: site-config
               mountPath: /etc/nginx/conf.d
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.health.name }}
           readinessProbe:
             httpGet:
               path: /ready
-              port: http
+              port: {{ .Values.health.name }} 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: nginx-metrics

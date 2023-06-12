@@ -5,7 +5,7 @@ metadata:
 data:
   default.conf: |-
     server {
-      listen 8080;
+      listen {{ .Values.health.port }};
       server_name localhost;
       location /metrics {
         stub_status;
