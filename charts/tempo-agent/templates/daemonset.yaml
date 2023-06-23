@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "tempo-agent.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
 spec:
   minReadySeconds: 10
   revisionHistoryLimit: 10
