@@ -32,7 +32,7 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | nameOverride | string | `""` |  |
 | nginx.config | string | `""` |  |
 | nginx.siteConfig | string | `""` |  |
-| nginx.tempdir | string | `"/var/run/nginx"` |  |
+| nginx.tempDir | string | `"/var/run/nginx"` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
