@@ -605,6 +605,17 @@ entries:
   tempo-agent:
   - apiVersion: v2
     appVersion: v0.31.3
+    created: "2023-06-23T14:00:15.355267942Z"
+    description: Helm chart to deploy a version of the grafana agent geared towards
+      receiving tempo traces and forwarding them to a tempo instance
+    digest: 233d7757d78afbf866dffcce5e630522b078396cf08d581e772d7bce7c8f9a5a
+    name: tempo-agent
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.18/tempo-agent-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    appVersion: v0.31.3
     created: "2023-02-28T16:38:16.782953127Z"
     description: Helm chart to deploy a version of the grafana agent geared towards
       receiving tempo traces and forwarding them to a tempo instance
@@ -775,4 +786,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2023-06-12T12:46:56.421427898Z"
+generated: "2023-06-23T14:00:15.355740253Z"
