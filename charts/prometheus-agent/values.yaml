@@ -16,6 +16,9 @@ nameLabelOverride:
 
 bearerAuth: false
 
+scrapeAgentMetrics:
+  enabled: true
+
 remote_write:
   # -- Prometheus/Mimir Connection
   - url:

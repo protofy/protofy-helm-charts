@@ -35,6 +35,10 @@ spec:
         {{- include "prometheus-agent.labels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+        {{- if .Values.scrapeAgentMetrics.enabled }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
+        {{- end }} 
     spec:
       containers:
         - args:

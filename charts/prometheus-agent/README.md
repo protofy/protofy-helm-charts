@@ -1,6 +1,6 @@
 # prometheus-agent
 
-![Version: 0.0.36](https://img.shields.io/badge/Version-0.0.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
+![Version: 0.0.37](https://img.shields.io/badge/Version-0.0.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
 
 Helm chart to deploy a version of the grafana agent geared towards scraping prometheus metrics and sending them to a Prometheus/Mimir instance via remote write
 
@@ -20,6 +20,7 @@ Helm chart to deploy a version of the grafana agent geared towards scraping prom
 | nameOverride | string | `nil` |  |
 | remote_write[0] | object | `{"basic_auth":{"password":null,"username":null},"tenant_id":null,"url":null}` | Prometheus/Mimir Connection |
 | remote_write[0].tenant_id | string | `nil` | Tenant ID in case prometheus is running in multi_tenant mode |
+| scrapeAgentMetrics.enabled | bool | `true` |  |
 | serviceAccount.clusterRole | object | `{"create":true}` | Create the cluster role that the service account uses. Only neccessary for the first agent |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.labels | object | `{}` | Annotations to add to the service account |
