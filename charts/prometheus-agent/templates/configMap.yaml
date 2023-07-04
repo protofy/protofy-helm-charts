@@ -65,6 +65,10 @@ data:
                   source_labels:
                     - __meta_kubernetes_node_name
                   target_label: __metrics_path__
+                - source_labels:
+                  - __meta_kubernetes_node_address_ExternalIP
+                  action: replace
+                  target: external_ip
               scheme: https
               tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -147,6 +151,8 @@ data:
                   replacement: ${1}:${2}
                   target_label: __address__
                 # Expose Pod labels as metric labels
+                - action: labelmap
+                  regex: __meta_kubernetes_pod_label_app_kubernetes_io_(.+)
                 - action: labelmap
                   regex: __meta_kubernetes_pod_label_(.+)
                 # Expose Pod namespace as metric namespace label
