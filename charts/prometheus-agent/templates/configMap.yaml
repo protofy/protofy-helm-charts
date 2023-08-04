@@ -68,7 +68,7 @@ data:
                 - source_labels:
                   - __meta_kubernetes_node_address_ExternalIP
                   action: replace
-                  target: external_ip
+                  target_label: external_ip
               scheme: https
               tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
