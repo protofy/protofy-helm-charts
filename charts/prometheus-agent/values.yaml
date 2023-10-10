@@ -18,7 +18,9 @@ bearerAuth: false
 
 scrapeAgentMetrics:
   enabled: true
-
+wal:
+  cleanup_age: 1h
+  cleanup_period: 15m
 remote_write:
   # -- Prometheus/Mimir Connection
   - url:
