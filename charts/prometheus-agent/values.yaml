@@ -31,7 +31,9 @@ remote_write:
     tenant_id:
 
 # -- Targets to scrape with the blackbox module
-blackboxTargets: []
+blackboxTargets:
+  - module: ""
+    targets: []
 # -- Address of the blackbox service to use
 blackboxAddress: prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox:9115
 

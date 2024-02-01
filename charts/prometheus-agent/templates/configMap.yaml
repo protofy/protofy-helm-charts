@@ -181,13 +181,14 @@ data:
                 server_name: kubernetes
     {{- end }}
     {{- if .Values.blackboxTargets }}
-            - job_name: 'blackbox-external-targets'
+            {{- range .Values.blackboxTargets }}
+            - job_name: 'blackbox-external-targets-{{.module}}'
               metrics_path: /probe
               params:
-                module: [ http_2xx ]
+                module: [ .module ]
               static_configs:
                 - targets:
-                    {{- range .Values.blackboxTargets }}
+                    {{- range .targets }}
                     - {{.}}
                     {{- end}}
               relabel_configs:
@@ -196,5 +197,6 @@ data:
                 - source_labels: [ __param_target ]
                   target_label: instance
                 - target_label: __address__
-                  replacement: {{ .Values.blackboxAddress }}
+                  replacement: {{ $.Values.blackboxAddress }}
+            {{- end }}
     {{- end }}
