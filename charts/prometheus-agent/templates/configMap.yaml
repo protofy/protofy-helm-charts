@@ -185,7 +185,7 @@ data:
             - job_name: 'blackbox-external-targets-{{.module}}'
               metrics_path: /probe
               params:
-                module: [ .module ]
+                module: [ {{.module}} ]
               static_configs:
                 - targets:
                     {{- range .targets }}
