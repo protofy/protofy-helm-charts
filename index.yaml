@@ -665,6 +665,16 @@ entries:
   strapi:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2024-04-17T14:53:14.050322797Z"
+    description: A Helm chart for Kubernetes
+    digest: 1328468ab25aaf2ad008b470a6ae2b0bce914006af579528a31f0767f9539505
+    name: strapi
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/strapi-0.1.1/strapi-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2024-04-17T12:42:30.95428112Z"
     description: A Helm chart for Kubernetes
     digest: 5350891145bf0d1e35280742db581952329f900373b1cfc660658c24d6c2c704
@@ -857,4 +867,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2024-04-17T12:42:30.954515106Z"
+generated: "2024-04-17T14:53:14.05051141Z"
