@@ -662,6 +662,17 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/prometheus-agent-0.0.1/prometheus-agent-0.0.1.tgz
     version: 0.0.1
+  strapi:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-04-17T12:42:30.95428112Z"
+    description: A Helm chart for Kubernetes
+    digest: 5350891145bf0d1e35280742db581952329f900373b1cfc660658c24d6c2c704
+    name: strapi
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/strapi-0.1.0/strapi-0.1.0.tgz
+    version: 0.1.0
   tempo-agent:
   - apiVersion: v2
     appVersion: v0.31.3
@@ -846,4 +857,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2024-02-02T13:15:04.678629405Z"
+generated: "2024-04-17T12:42:30.954515106Z"
