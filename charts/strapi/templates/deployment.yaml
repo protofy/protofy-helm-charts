@@ -88,7 +88,7 @@ spec:
             - name: HOST
               value: {{ .Values.strapi.host }}
             - name: PORT
-              value: {{ .Values.service.port }}
+              value: "{{ .Values.service.port }}"
             - name: DATABASE_CLIENT
               valueFrom:
                 configMapKeyRef:
