@@ -28,6 +28,8 @@ podAnnotations: {}
 persistence:
   enabled: false
   existingClaim: ""
+  storageClass: gp2
+  storage: 2Gi
 podSecurityContext: {}
 # fsGroup: 2000
 

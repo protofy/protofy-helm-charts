@@ -139,7 +139,7 @@ spec:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: init.admin.email
-            - NAME: S3_ENABLED
+            - name: S3_ENABLED
               value: {{ .Values.s3.enabled }}
             - name: S3_ENDPOINT
               valueFrom:
@@ -161,34 +161,36 @@ spec:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: s3.secret.key
-            - NAME: APP_KEYS
+            - name: APP_KEYS
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: app_keys
-            - NAME: JWT_SECRET
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: jwt_secret
-            - NAME: ADMIN_JWT_SECRET
+            - name: ADMIN_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: admin_jwt_secret
-            - NAME: API_TOKEN_SALT
+            - name: API_TOKEN_SALT
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: api_token_salt
-            - NAME: TRANSFER_TOKEN_SALT
+            - name: TRANSFER_TOKEN_SALT
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: transfer_token_salt
           volumeMounts:
+            {{- if .Values.persistence.enabled }}
             - name: strapi-data
               mountPath: /opt/public/uploads
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
