@@ -173,6 +173,11 @@ spec:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: s3.secret_key
+            - name: S3_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-db-config
+                  key: s3.region
             - name: APP_KEYS
               valueFrom:
                 secretKeyRef:
