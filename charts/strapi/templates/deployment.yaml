@@ -28,10 +28,12 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
+        {{- if .Values.persistence.enabled }}
         - name: strapi-data
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default (include "strapi.fullname" .) }}
-      containers:
+        {{- end }}
+      initContainers:
         - name: "{{ .Chart.Name }}-db-init"
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -52,7 +54,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: strapi-db-config
-                  key: database.name
+                  key: database.db_name
             - name: PGHOST
               valueFrom:
                 configMapKeyRef:
@@ -77,8 +79,8 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: strapi-db-config
-                  key: database.schema
-          command: ["psql", "-f", "setup_script.sql"]
+                  key: database.schema_name
+      containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -95,6 +97,11 @@ spec:
                   name: strapi-db-config
                   key: database.client
             - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-db-config
+                  key: database.db_name
+            - name: DATABASE_SCHEMA
               valueFrom:
                 configMapKeyRef:
                   name: strapi-db-config
@@ -119,48 +126,53 @@ spec:
                 secretKeyRef:
                   name: strapi-secrets 
                   key: database.password
+            - name: INIT_ADMIN_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-db-config
+                  key: init_admin.enabled
             - name: INIT_ADMIN_USERNAME
               valueFrom:
-                secretKeyRef:
-                  name: strapi-secrets 
-                  key: init.admin.username
+                configMapKeyRef: 
+                  name: strapi-db-config 
+                  key: init_admin.username
             - name: INIT_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
-                  key: init.admin.password
+                  key: init_admin.password
             - name: INIT_ADMIN_FIRSTNAME
               valueFrom:
-                secretKeyRef:
-                  name: strapi-secrets 
-                  key: init.admin.firstname
+                configMapKeyRef:
+                  name: strapi-db-config
+                  key: init_admin.firstname
             - name: INIT_ADMIN_EMAIL
               valueFrom:
-                secretKeyRef:
-                  name: strapi-secrets 
-                  key: init.admin.email
+                configMapKeyRef:
+                  name: strapi-db-config
+                  key: init_admin.email
             - name: S3_ENABLED
-              value: {{ .Values.s3.enabled }}
+              value: "{{ .Values.s3.enabled }}"
             - name: S3_ENDPOINT
               valueFrom:
                 configMapKeyRef:
-                  name: strapi-s3-config
+                  name: strapi-db-config
                   key: s3.endpoint
             - name: S3_BUCKET
               valueFrom:
                 configMapKeyRef:
-                  name: strapi-s3-config
+                  name: strapi-db-config
                   key: s3.bucket
             - name: S3_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
-                  key: s3.access.key
+                  key: s3.access_key
             - name: S3_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: strapi-secrets 
-                  key: s3.secret.key
+                  key: s3.secret_key
             - name: APP_KEYS
               valueFrom:
                 secretKeyRef:
@@ -208,11 +220,11 @@ spec:
             httpGet:
               path: /
               port: http
-            initial_delay_seconds: 10
-            period_seconds: 5
-            timeout_seconds: 5
-            success_threshold: 1
-            failure_threshold: 10
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
