@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
 
 This is a very simple NGINX chart, that can deploy a webserver serving a site config. Its main use case is to do more complex proxy passing than an ingress could handle.
 
@@ -39,7 +39,12 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | replicaCount | int | `1` |  |
 | resources | object | `{}` |  |
 | securityContext | object | `{}` |  |
-| service.port | int | `80` |  |
+| service.annotations | object | `{}` |  |
+| service.loadBalancerClass | string | `nil` |  |
+| service.ports[0].name | string | `"http"` |  |
+| service.ports[0].protocol | string | `"TCP"` |  |
+| service.ports[0].sourcePort | int | `80` |  |
+| service.ports[0].targetPort | string | `"http"` |  |
 | service.type | string | `"ClusterIP"` |  |
 | tolerations | list | `[]` |  |
 
