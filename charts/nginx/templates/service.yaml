@@ -4,12 +4,21 @@ metadata:
   name: {{ include "nginx.fullname" . }}
   labels:
     {{- include "nginx.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
+  {{- if .Values.service.loadBalancerClass }}
+  loadBalancerClass: {{.Values.service.loadBalancerClass}}
+  {{- end }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  {{ for port in .Values.service.ports }}
+    - port: {{ .sourcePort }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol }}
+      name: {{ port.name }}
+  {{ end }}
   selector:
     {{- include "nginx.selectorLabels" . | nindent 4 }}
