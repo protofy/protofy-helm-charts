@@ -37,7 +37,6 @@ service:
 
 health:
   name: healthcheck
-  port: 8080
 
 ingress:
   enabled: false
@@ -81,6 +80,13 @@ affinity: {}
 #    }
 #  }
 nginx:
+  ports:
+    - name: http
+      port: 80
+      protcol: TCP
+    - name: healh
+      port: 8080
+      protocol: TCP
   config: ""
   siteConfig: ""
   tempDir: "/var/run/nginx"

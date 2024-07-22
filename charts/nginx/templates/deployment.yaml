@@ -40,12 +40,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-            - name: {{ .Values.health.name }} 
-              containerPort: {{ .Values.health.port }}
-              protocol: TCP
+            {{- range .Values.nginx.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .port }} 
+              protocol: {{ .protocol }}
+            {{- end }}
           volumeMounts:
             - name: nginx-temp
               mountPath: {{ .Values.nginx.tempDir }}
