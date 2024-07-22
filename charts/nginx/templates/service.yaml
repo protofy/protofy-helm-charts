@@ -14,11 +14,11 @@ spec:
   loadBalancerClass: {{.Values.service.loadBalancerClass}}
   {{- end }}
   ports:
-  {{ for port in .Values.service.ports }}
+  {{- range .Values.service.ports }}
     - port: {{ .sourcePort }}
       targetPort: {{ .targetPort }}
       protocol: {{ .protocol }}
-      name: {{ port.name }}
-  {{ end }}
+      name: {{ .name }}
+  {{- end }}
   selector:
     {{- include "nginx.selectorLabels" . | nindent 4 }}
