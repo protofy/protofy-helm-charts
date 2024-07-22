@@ -37,6 +37,7 @@ service:
 
 health:
   name: healthcheck
+  port: 8080
 
 ingress:
   enabled: false
@@ -84,7 +85,7 @@ nginx:
     - name: http
       port: 80
       protcol: TCP
-    - name: healh
+    - name: healthcheck
       port: 8080
       protocol: TCP
   config: ""
