@@ -24,6 +24,18 @@ entries:
   nginx:
   - apiVersion: v2
     appVersion: 1.25.0
+    created: "2024-07-22T09:08:00.098306429Z"
+    description: This is a very simple NGINX chart, that can deploy a webserver serving
+      a site config. Its main use case is to do more complex proxy passing than an
+      ingress could handle.
+    digest: 3d2a9bfe4a38a73c796b2e59c29e8820423b19f9db6c7102325a60ac610f51e8
+    name: nginx
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/nginx-1.0.2/nginx-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 1.25.0
     created: "2024-07-22T08:53:21.074800513Z"
     description: This is a very simple NGINX chart, that can deploy a webserver serving
       a site config. Its main use case is to do more complex proxy passing than an
@@ -921,4 +933,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2024-07-22T08:53:21.075186018Z"
+generated: "2024-07-22T09:08:00.098480834Z"
