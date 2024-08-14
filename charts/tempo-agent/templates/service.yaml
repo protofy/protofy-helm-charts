@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "tempo-agent.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- include "tempo-agent.commonAnnotations" . | nindent 4 }}
 spec:
   ports:
     - name: traces-http-metrics
