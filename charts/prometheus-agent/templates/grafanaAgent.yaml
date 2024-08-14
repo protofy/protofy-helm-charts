@@ -4,6 +4,8 @@ metadata:
   name: {{ include "prometheus-agent.fullname" . }}
   labels:
     {{- include "prometheus-agent.labels" . | nindent 4 }}
+  annotations:
+    {{- include "prometheus-agent.commonAnnotations" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   clusterIP: None
@@ -22,6 +24,7 @@ metadata:
     {{- include "prometheus-agent.labels" . | nindent 4 }}
   annotations:
     checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+    {{- include "prometheus-agent.commonAnnotations" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: 1
@@ -35,10 +38,11 @@ spec:
         {{- include "prometheus-agent.labels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configMap.yaml") . | sha256sum }}
+        {{- include "prometheus-agent.commonAnnotations" . | nindent 8 }}
         {{- if .Values.scrapeAgentMetrics.enabled }}
         prometheus.io/scrape: "true"
         prometheus.io/port: "80"
-        {{- end }} 
+        {{- end }}
     spec:
       containers:
         - args:

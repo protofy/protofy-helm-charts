@@ -1,6 +1,8 @@
 kind: ConfigMap
 metadata:
   name: {{ include "prometheus-agent.fullname" . }}
+  annotations:
+    {{- include "prometheus-agent.commonAnnotations" . | nindent 4 }}
   labels:
     {{- include "prometheus-agent.labels" . | nindent 4 }}
 apiVersion: v1
