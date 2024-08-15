@@ -3,6 +3,8 @@ metadata:
   name: {{ include "tempo-agent.fullname" . }}
   labels:
     {{- include "tempo-agent.labels" . | nindent 4 }}
+  annotations:
+    {{- include "tempo-agent.commonAnnotations" . | nindent 4 }}
 apiVersion: v1
 data:
   agent.yaml: |

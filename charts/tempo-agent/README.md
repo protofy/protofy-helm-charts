@@ -1,6 +1,6 @@
 # tempo-agent
 
-![Version: 0.0.18](https://img.shields.io/badge/Version-0.0.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
+![Version: 0.0.19](https://img.shields.io/badge/Version-0.0.19-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
 
 Helm chart to deploy a version of the grafana agent geared towards receiving tempo traces and forwarding them to a tempo instance
 
@@ -9,6 +9,7 @@ Helm chart to deploy a version of the grafana agent geared towards receiving tem
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | cluster_name | string | `""` | Name of the cluster that is being monitored |
+| commonAnnotations | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | nameOverride | string | `""` |  |
 | remote_write[0] | object | `{"basic_auth":{"password":null,"username":null},"endpoint":null,"retry_on_failure":{"enabled":false},"tenant_id":null,"useGrpc":false}` | Tempo Connection |

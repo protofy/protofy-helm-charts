@@ -1,6 +1,6 @@
 # prometheus-agent
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
 
 Helm chart to deploy a version of the grafana agent geared towards scraping prometheus metrics and sending them to a Prometheus/Mimir instance via remote write
 
@@ -12,6 +12,7 @@ Helm chart to deploy a version of the grafana agent geared towards scraping prom
 | blackboxAddress | string | `"prometheus-blackbox-prometheus-blackbox-exporter.prometheus-blackbox:9115"` | Address of the blackbox service to use |
 | blackboxTargets | list | `[{"module":"","targets":[]}]` | Targets to scrape with the blackbox module |
 | cluster_name | string | `nil` | Name of the cluster that is being monitored |
+| commonAnnotations | object | `{}` |  |
 | environment | string | `nil` | Stage, eg.: testing, staging, production |
 | fullnameOverride | string | `nil` |  |
 | monitor_kubernetes | bool | `false` | When set to true scrapes kubernetes metrics |
