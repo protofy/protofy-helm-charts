@@ -1,24 +1,35 @@
 {
   "prConcurrentLimit": 1,
   "extends": [
-    "config:base", ":dependencyDashboard"
-  ],  
-  "schedule": ["on monday", "on wednesday", "on friday"],
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "schedule": [
+    "on monday",
+    "on wednesday",
+    "on friday"
+  ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["patch"],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "groupName": "patch dependencies",
       "prPriority": 30
     },
     {
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": [
+        "minor"
+      ],
       "groupName": "minor dependencies",
-      "stabilityDays": 7,
+      "minimumReleaseAge": "7 days",
       "prPriority": 20
     },
     {
-      "matchUpdateTypes": ["major"],
-      "stabilityDays": 30,
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "minimumReleaseAge": "30 days",
       "prPriority": 10
     }
   ]
