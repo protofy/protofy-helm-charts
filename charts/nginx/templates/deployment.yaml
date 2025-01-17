@@ -17,7 +17,7 @@ spec:
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        {{- if .Values.siteConfig }}
+        {{- if .Values.nginx.siteConfig }}
         checksum/server-block-configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.metrics.enabled }}

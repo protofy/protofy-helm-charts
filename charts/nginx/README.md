@@ -29,11 +29,12 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | ingress.tls | list | `[]` |  |
 | metrics.enabled | bool | `true` |  |
 | metrics.port | int | `9113` |  |
+| metrics.resources | object | `{}` |  |
 | nameOverride | string | `""` |  |
 | nginx.config | string | `""` |  |
 | nginx.ports[0].name | string | `"http"` |  |
 | nginx.ports[0].port | int | `80` |  |
-| nginx.ports[0].protcol | string | `"TCP"` |  |
+| nginx.ports[0].protocol | string | `"TCP"` |  |
 | nginx.ports[1].name | string | `"healthcheck"` |  |
 | nginx.ports[1].port | int | `8080` |  |
 | nginx.ports[1].protocol | string | `"TCP"` |  |

@@ -84,7 +84,7 @@ nginx:
   ports:
     - name: http
       port: 80
-      protcol: TCP
+      protocol: TCP
     - name: healthcheck
       port: 8080
       protocol: TCP
@@ -95,3 +95,4 @@ nginx:
 metrics:
   enabled: true
   port: 9113
+  resources: {}
