@@ -15,7 +15,7 @@ spec:
   {{- end }}
   ports:
   {{- range .Values.service.ports }}
-    - port: {{ .port }}
+    - port: {{ .sourcePort }}
       targetPort: {{ .targetPort }}
       protocol: {{ .protocol }}
       name: {{ .name }}
