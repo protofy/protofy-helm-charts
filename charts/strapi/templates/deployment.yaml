@@ -33,6 +33,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default (include "strapi.fullname" .) }}
         {{- end }}
+      {{- if ne .Value.initImage.tag "" }}
       initContainers:
         - name: "{{ .Chart.Name }}-db-init"
           securityContext:
@@ -80,6 +81,7 @@ spec:
                 configMapKeyRef:
                   name: strapi-db-config
                   key: database.schema_name
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
