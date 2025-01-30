@@ -33,7 +33,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default (include "strapi.fullname" .) }}
         {{- end }}
-      {{- if ne .Value.initImage.tag "" }}
+      {{- if .Values.initImage }}
       initContainers:
         - name: "{{ .Chart.Name }}-db-init"
           securityContext:
