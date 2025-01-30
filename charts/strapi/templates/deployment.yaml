@@ -20,9 +20,9 @@ spec:
       labels:
         {{- include "strapi.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- if ne .Values.image.credentials.password "" }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+      - name: myregistrykey
       {{- end }}
       serviceAccountName: {{ include "strapi.serviceAccountName" . }}
       securityContext:
