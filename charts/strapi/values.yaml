@@ -13,7 +13,11 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
-imagePullSecrets: []
+  credentials:
+    registry: ""
+    username: ""
+    password: ""
+
 nameOverride: ""
 fullnameOverride: ""
 serviceAccount:
@@ -74,7 +78,7 @@ resources:
     cpu: 100m
     memory: 256Mi
 autoscaling:
-  enabled: false 
+  enabled: false
   minReplicas: 1
   maxReplicas: 4
   targetCPUUtilizationPercentage: 80
