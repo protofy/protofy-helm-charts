@@ -40,8 +40,6 @@ data:
               headers:
                 X-Scope-OrgId: '{{.tenant_id}}'
               {{- end }}
-              queue_config:
-                sample_age_limit: '{{.queue_config.sample_age_limit}}'
             {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}
