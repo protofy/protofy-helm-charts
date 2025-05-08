@@ -20,9 +20,19 @@ bearerAuth: false
 
 scrapeAgentMetrics:
   enabled: true
+
+server:
+  log_level: info
+  log_format: logfmt
+
 wal:
   cleanup_age: 1h
   cleanup_period: 15m
+
+  # -- Aggressive cleanup strategy
+  truncate_frequency: 5m
+  min_time: 3m
+  max_time: 30m
 remote_write:
   # -- Prometheus/Mimir Connection
   - url:
