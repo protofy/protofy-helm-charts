@@ -29,9 +29,11 @@ wal:
   cleanup_age: 1h
   cleanup_period: 15m
 
-  # -- Aggressive cleanup strategy
+  # -- How often to truncate the WAL
   truncate_frequency: 5m
+  # -- Minimum time to keep WAL files
   min_time: 3m
+  # -- Maximum time to keep WAL files
   max_time: 30m
 remote_write:
   # -- Prometheus/Mimir Connection
