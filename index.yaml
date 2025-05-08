@@ -290,6 +290,18 @@ entries:
   prometheus-agent:
   - apiVersion: v2
     appVersion: v0.31.3
+    created: "2025-05-08T15:50:02.041144104Z"
+    description: Helm chart to deploy a version of the grafana agent geared towards
+      scraping prometheus metrics and sending them to a Prometheus/Mimir instance
+      via remote write
+    digest: 31e6d24f35539b6442807c8d4ad87a435483d7d7ea07c4280e8f0e37c7733ce0
+    name: prometheus-agent
+    type: application
+    urls:
+    - https://github.com/protofy/protofy-helm-charts/releases/download/prometheus-agent-0.1.5/prometheus-agent-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: v0.31.3
     created: "2025-05-08T05:40:19.626611156Z"
     description: Helm chart to deploy a version of the grafana agent geared towards
       scraping prometheus metrics and sending them to a Prometheus/Mimir instance
@@ -1044,4 +1056,4 @@ entries:
     urls:
     - https://github.com/protofy/protofy-helm-charts/releases/download/tempo-agent-0.0.1/tempo-agent-0.0.1.tgz
     version: 0.0.1
-generated: "2025-05-08T05:40:19.627075108Z"
+generated: "2025-05-08T15:50:02.041671101Z"
