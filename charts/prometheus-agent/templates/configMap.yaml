@@ -43,7 +43,7 @@ data:
                 X-Scope-OrgId: '{{.tenant_id}}'
               {{- end }}
               queue_config:
-                {{ toYaml .queue_config | indent 16 }}
+                sample_age_limit: {{.queue_config.sample_age_limit}}
 
             {{- end }}
           scrape_configs:
