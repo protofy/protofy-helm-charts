@@ -17,8 +17,6 @@ data:
       wal_cleanup_age: {{ .Values.wal.cleanup_age }}
       wal_cleanup_period: {{ .Values.wal.cleanup_period }}
       global:
-        queue_config:
-          sample_age_limit: {{ .Values.queue_config.sample_age_limit }}
         scrape_interval: 15s
         external_labels:
           {{- if .Values.cluster_name }}
@@ -43,8 +41,7 @@ data:
                 X-Scope-OrgId: '{{.tenant_id}}'
               {{- end }}
               queue_config:
-                sample_age_limit: {{.queue_config.sample_age_limit}}
-
+                sample_age_limit: '{{.queue_config.sample_age_limit}}'
             {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}
