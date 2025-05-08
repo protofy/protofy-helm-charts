@@ -9,9 +9,15 @@ apiVersion: v1
 data:
   agent.yaml: |
     metrics:
+      server:
+        log_level: {{ .Values.server.log_level }}
+        log_format: {{ .Values.server.log_format }}
       wal_directory: /var/lib/agent/wal
       wal_cleanup_age: {{ .Values.wal.cleanup_age }}
       wal_cleanup_period: {{ .Values.wal.cleanup_period }}
+      wal_truncate_frequency: {{ .Values.wal.truncate_frequency }}
+      min_wal_time: {{ .Values.wal.min_time }}
+      max_wal_time: {{ .Values.wal.max_time }}
       global:
         scrape_interval: 15s
         external_labels:
