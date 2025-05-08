@@ -42,6 +42,9 @@ data:
               headers:
                 X-Scope-OrgId: '{{.tenant_id}}'
               {{- end }}
+              queue_config:
+                {{ toYaml .queue_config | indent 16 }}
+
             {{- end }}
           scrape_configs:
     {{- if .Values.monitor_kubernetes }}

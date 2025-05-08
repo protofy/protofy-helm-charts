@@ -25,10 +25,6 @@ server:
   log_level: info
   log_format: logfmt
 
-queue_config:
-    # -- Drop samples older than this
-    sample_age_limit: 3m
-
 wal:
   cleanup_age: 1h
   cleanup_period: 15m
@@ -47,6 +43,9 @@ remote_write:
       password:
     # -- Tenant ID in case prometheus is running in multi_tenant mode
     tenant_id:
+    queue_config:
+      # -- Drop samples older than this
+      sample_age_limit: 3m
 
 # -- Targets to scrape with the blackbox module
 blackboxTargets:
