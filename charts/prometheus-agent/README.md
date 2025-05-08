@@ -1,6 +1,6 @@
 # prometheus-agent
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
+![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.31.3](https://img.shields.io/badge/AppVersion-v0.31.3-informational?style=flat-square)
 
 Helm chart to deploy a version of the grafana agent geared towards scraping prometheus metrics and sending them to a Prometheus/Mimir instance via remote write
 
@@ -19,8 +19,7 @@ Helm chart to deploy a version of the grafana agent geared towards scraping prom
 | monitor_pods | bool | `true` | When set to true will scrape pod metrics |
 | nameLabelOverride | string | `nil` |  |
 | nameOverride | string | `nil` |  |
-| remote_write[0] | object | `{"basic_auth":{"password":null,"username":null},"queue_config":{"sample_age_limit":"3m"},"tenant_id":null,"url":null}` | Prometheus/Mimir Connection |
-| remote_write[0].queue_config.sample_age_limit | string | `"3m"` | Drop samples older than this |
+| remote_write[0] | object | `{"basic_auth":{"password":null,"username":null},"tenant_id":null,"url":null}` | Prometheus/Mimir Connection |
 | remote_write[0].tenant_id | string | `nil` | Tenant ID in case prometheus is running in multi_tenant mode |
 | scrapeAgentMetrics.enabled | bool | `true` |  |
 | server.log_format | string | `"logfmt"` |  |
