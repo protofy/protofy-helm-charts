@@ -25,6 +25,10 @@ server:
   log_level: info
   log_format: logfmt
 
+queue_config:
+    # -- Drop samples older than this
+    sample_age_limit: 3m
+
 wal:
   cleanup_age: 1h
   cleanup_period: 15m
