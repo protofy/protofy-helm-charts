@@ -30,7 +30,7 @@ wal:
   cleanup_period: 15m
 
   # -- How often to truncate the WAL
-  truncate_frequency: 5m
+  truncate_frequency: 6m
   # -- Minimum time to keep WAL files
   min_time: 3m
   # -- Maximum time to keep WAL files

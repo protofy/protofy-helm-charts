@@ -151,10 +151,7 @@ data:
     {{- if .Values.monitor_pods }}
             {{- $scrapeJobs := list
               (dict "name" "kubernetes-pods" "annotation" "prometheus_io_scrape" "interval" "")
-              (dict "name" "kubernetes-pods-1m" "annotation" "prometheus_io_scrape_1m" "interval" "1m")
-              (dict "name" "kubernetes-pods-15m" "annotation" "prometheus_io_scrape_15m" "interval" "15m")
-              (dict "name" "kubernetes-pods-1h" "annotation" "prometheus_io_scrape_1h" "interval" "1h")
-              (dict "name" "kubernetes-pods-1d" "annotation" "prometheus_io_scrape_1d" "interval" "1d")
+              (dict "name" "kubernetes-pods-5m" "annotation" "prometheus_io_scrape_5m" "interval" "5m")
             }}
             {{- range $scrapeJobs }}
             - job_name: "{{ .name }}"
