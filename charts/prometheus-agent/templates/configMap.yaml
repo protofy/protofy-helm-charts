@@ -149,8 +149,16 @@ data:
                   target_label: __metrics_path__
     {{- end }}
     {{- if .Values.monitor_pods }}
-            - job_name: "kubernetes-pods"
-              {{- if .Values.bearerAuth}}
+            {{- $scrapeJobs := list
+              (dict "name" "kubernetes-pods" "annotation" "prometheus_io_scrape" "interval" "")
+              (dict "name" "kubernetes-pods-5m" "annotation" "prometheus_io_scrape_5m" "interval" "5m")
+            }}
+            {{- range $scrapeJobs }}
+            - job_name: "{{ .name }}"
+              {{- if .interval }}
+              scrape_interval: {{ .interval }}
+              {{- end }}
+              {{- if $.Values.bearerAuth}}
               bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
               {{- end }}
               kubernetes_sd_configs:
@@ -161,8 +169,8 @@ data:
                   action: replace
                   target_label: __scheme__
                   regex: (https?)
-                # Scrape metrics when the prometheus.io/scrape annotation has been set to true
-                - source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_scrape ]
+                # Scrape metrics when the {{ .annotation | replace "_" "." }} annotation has been set to true
+                - source_labels: [ __meta_kubernetes_pod_annotation_{{ .annotation }} ]
                   action: keep
                   regex: true
                 # Allow us to overwrite the path with the content of prometheus.io/path
@@ -170,7 +178,7 @@ data:
                   action: replace
                   target_label: __metrics_path__
                   regex: (.+)
-                  # Allow us to overwrite the default path with the content of prometheus.io/port
+                # Allow us to overwrite the default path with the content of prometheus.io/port
                 - source_labels: [ __address__, __meta_kubernetes_pod_annotation_prometheus_io_port ]
                   action: replace
                   regex: ([^:]+)(?::\d+)?;(\d+)
@@ -189,11 +197,11 @@ data:
                 - source_labels: [ __meta_kubernetes_pod_name ]
                   action: replace
                   target_label: pod
-                {{- if .Values.nameLabelOverride }}
-                - source_labels: [ __meta_kubernetes_namespace, __meta_kubernetes_pod_label_{{.Values.nameLabelOverride}}]
-                {{- else}}
+                {{- if $.Values.nameLabelOverride }}
+                - source_labels: [ __meta_kubernetes_namespace, __meta_kubernetes_pod_label_{{ $.Values.nameLabelOverride }}]
+                {{- else }}
                 - source_labels: [ __meta_kubernetes_namespace, __meta_kubernetes_pod_label_name ]
-                {{- end}}
+                {{- end }}
                   action: replace
                   separator: /
                   target_label: job
@@ -203,6 +211,7 @@ data:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
                 insecure_skip_verify: false
                 server_name: kubernetes
+            {{- end }}
     {{- end }}
     {{- if .Values.blackboxTargets }}
             {{- range .Values.blackboxTargets }}
