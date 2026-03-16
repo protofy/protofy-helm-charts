@@ -1,6 +1,6 @@
 # nginx
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.25.0](https://img.shields.io/badge/AppVersion-1.25.0-informational?style=flat-square)
 
 This is a very simple NGINX chart, that can deploy a webserver serving a site config. Its main use case is to do more complex proxy passing than an ingress could handle.
 
@@ -41,6 +41,11 @@ This is a very simple NGINX chart, that can deploy a webserver serving a site co
 | nginx.siteConfig | string | `""` |  |
 | nginx.tempDir | string | `"/var/run/nginx"` |  |
 | nodeSelector | object | `{}` |  |
+| persistence.accessMode | string | `"ReadWriteOnce"` |  |
+| persistence.enabled | bool | `false` |  |
+| persistence.mountPath | string | `"/var/cache/nginx"` |  |
+| persistence.size | string | `"1Gi"` |  |
+| persistence.storageClass | string | `""` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | replicaCount | int | `1` |  |
