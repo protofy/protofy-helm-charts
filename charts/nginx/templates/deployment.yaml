@@ -57,6 +57,10 @@ spec:
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
             {{- end }}
+            {{- if .Values.persistence.enabled }}
+            - name: cache
+              mountPath: {{ .Values.persistence.mountPath }}
+            {{- end }}
           livenessProbe:
             httpGet:
               path: /
@@ -89,6 +93,11 @@ spec:
         - name: nginx-config
           configMap:
             name: nginx-config
+        {{- end }}
+        {{- if .Values.persistence.enabled }}
+        - name: cache
+          persistentVolumeClaim:
+            claimName: {{ include "nginx.fullname" . }}-cache
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

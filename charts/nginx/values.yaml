@@ -92,6 +92,13 @@ nginx:
   siteConfig: ""
   tempDir: "/var/run/nginx"
 
+persistence:
+  enabled: false
+  size: 1Gi
+  mountPath: /var/cache/nginx
+  storageClass: ""
+  accessMode: ReadWriteOnce
+
 metrics:
   enabled: true
   port: 9113
