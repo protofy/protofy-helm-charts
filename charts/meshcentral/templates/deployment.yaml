@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "meshcentral.fullname" . }}
+  labels:
+    {{- include "meshcentral.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "meshcentral.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "meshcentral.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}  
+          ports:
+            {{- range .Values.service.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .targetPort }} 
+              protocol: {{ .protocol }}
+            {{- end }}
+          volumeMounts:
+            {{- if .Values.persistence.enabled}}
+            - name: cache
+              mountPath: /opt/meshcentral/meshcentral-data
+              subPath: data
+            - name: cache
+              mountPath: /opt/meshcentral/meshcentral-files 
+              subPath: files
+            - name: cache
+              mountPath: /opt/meshcentral/meshcentral-web
+              subPath: web
+            - name: cache
+              mountPath: /opt/meshcentral/meshcentral-backups
+              subPath: backups
+            {{- end }}          
+      volumes:
+        {{- if .Values.persistence.enabled }}
+        - name: cache
+          persistentVolumeClaim:
+            claimName: {{ include "meshcentral.fullname" . }}-data    
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
