@@ -30,5 +30,6 @@ persistence:
   size: 1Gi   
 
 env: 
-  TLS_OFFLOAD: "true"       
+  TLS_OFFLOAD: "true" 
+  DYNAMIC_CONFIG: "true"
   # HOSTNAME: wird über Terraform gesetzt(Ingress-Host)
