@@ -8,6 +8,7 @@ A Helm chart that deploys meshcentral
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| env.DYNAMIC_CONFIG | string | `"true"` |  |
 | env.TLS_OFFLOAD | string | `"true"` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
